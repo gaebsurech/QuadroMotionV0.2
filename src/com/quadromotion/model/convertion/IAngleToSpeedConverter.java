@@ -1,4 +1,4 @@
-package com.quadromotion.gestures.convertion;
+package com.quadromotion.model.convertion;
 
 public interface IAngleToSpeedConverter {
 

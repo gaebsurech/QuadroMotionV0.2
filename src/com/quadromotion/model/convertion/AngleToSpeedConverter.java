@@ -1,4 +1,4 @@
-package com.quadromotion.gestures.convertion;
+package com.quadromotion.model.convertion;
 
 // converts the input angle value to the output speed 
 public class AngleToSpeedConverter implements IAngleToSpeedConverter{

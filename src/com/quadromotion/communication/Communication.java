@@ -79,6 +79,7 @@ public class Communication implements ICommunication, Observer {
 	@Override
 	public void moveDrone(float speedX, float speedY, float speedZ, float speedSpin) {
 		cmd.move(speedX, speedY, speedZ, speedSpin);
+		//cmd.doFor(500).move(speedX, speedY, speedZ, speedSpin);
 	}
 
 	/**
@@ -112,6 +113,15 @@ public class Communication implements ICommunication, Observer {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * Cleans up the connection to the drone
+	 */
+	@Override
+	public void cleanup() {
+		if(cmd.isConnected() && cmd !=null) cmd.close();
+		
 	}
 
 }

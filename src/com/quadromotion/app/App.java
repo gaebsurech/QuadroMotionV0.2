@@ -7,6 +7,7 @@ import com.quadromotion.view.ConsolView;
 
 public class App {
 
+	boolean run = false;
 	static Controller controller = null;
 	static Model model = null;
 	static Boot boot = null;
@@ -25,7 +26,8 @@ public class App {
 		
 		view.printToConsole("run...");
 			// TODO State machine implementieren
-		while(true){
+		
+		while(run){
 			
 			controller.countObservers();
 			controller.setSpeed(Math.random());
@@ -35,5 +37,12 @@ public class App {
 			catch(Exception e){}
 			
 		}
+	}
+	
+	public void cleanup(){
+		view.printToConsole("cleanup...");
+		model = null;
+		controller = null;
+		view = null;
 	}
 }

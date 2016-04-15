@@ -29,10 +29,6 @@ public class Boot {
 		//gestures = new KeyBoardCommands();
 		controller = view.getController();
 	}
-	
-	public void run(){
-		
-	}
 
 	public Controller getController() {
 		return controller;

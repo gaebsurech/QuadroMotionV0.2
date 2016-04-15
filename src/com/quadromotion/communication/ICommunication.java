@@ -30,5 +30,10 @@ public interface ICommunication {
 	 * This method is needed to send the landing command
 	 */
 	public void landing();
+	
+	/**
+	 * This method is for cleaning up
+	 */
+	public void cleanup();
 
 }

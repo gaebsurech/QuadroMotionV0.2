@@ -8,10 +8,26 @@ public class QuadroMotion {
 		// TODO Auto-generated method stub
 		app = new App();
 		app.boot();
+		app.run = true;
 		app.run();
+<<<<<<< Updated upstream
 		
 		// Hallo gäbs
 		
+=======
+		try{
+			System.in.read();
+			app.run = false;
+			System.out.println("stopping...");
+			
+		} catch(Exception e){
+			System.out.println("error...");
+		}
+		finally{
+			app.cleanup();
+			System.exit(0);
+		}
+>>>>>>> Stashed changes
 	}
 
 }
