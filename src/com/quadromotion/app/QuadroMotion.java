@@ -1,5 +1,9 @@
 package com.quadromotion.app;
-
+/**
+ * This class is the main entry of the QuadroMotion app
+ * @author Gabriel
+ *
+ */
 public class QuadroMotion {
 
 	static App app = null;
@@ -10,11 +14,7 @@ public class QuadroMotion {
 		app.boot();
 		app.run = true;
 		app.run();
-<<<<<<< Updated upstream
-		
-		// Hallo gäbs
-		
-=======
+
 		try{
 			System.in.read();
 			app.run = false;
@@ -27,7 +27,7 @@ public class QuadroMotion {
 			app.cleanup();
 			System.exit(0);
 		}
->>>>>>> Stashed changes
+
 	}
 
 }
