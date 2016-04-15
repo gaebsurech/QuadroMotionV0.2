@@ -9,6 +9,9 @@ public class QuadroMotion {
 		app = new App();
 		app.boot();
 		app.run();
+		
+		// Hallo gäbs
+		
 	}
 
 }
