@@ -16,47 +16,7 @@ public class KeyBoardCommands implements IGestures{
 
 	
 
-	@Override
-	public void getSpeedX() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public float setSpeedY(float speedY) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void getSpeedY() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public float setSpeedZ(float speedZ) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void getSpeedZ() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public float setSpeedSpin(float speedSpin) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void getSpeedSpin() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	public Controller getController() {
 		return controller;
@@ -65,11 +25,4 @@ public class KeyBoardCommands implements IGestures{
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-
-	@Override
-	public float setSpeedX(float speedX) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

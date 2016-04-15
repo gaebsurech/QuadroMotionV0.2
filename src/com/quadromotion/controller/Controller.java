@@ -128,6 +128,7 @@ public class Controller implements IController, Observer {
 			this.setSpeedY(m.getySpeed());
 			consolView.printToConsole("update speedY: " + arg.toString());
 		}
+		
 	}
 
 	public KeyBoardCommands getGestures() {
