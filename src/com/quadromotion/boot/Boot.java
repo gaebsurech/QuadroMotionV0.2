@@ -1,6 +1,6 @@
 package com.quadromotion.boot;
 
-import com.quadromotion.communication.Communication;
+import com.quadromotion.controller.ARDroneController;
 import com.quadromotion.controller.Controller;
 import com.quadromotion.gestures.KeyBoardCommands;
 import com.quadromotion.model.Model;
@@ -10,16 +10,11 @@ public class Boot {
 	
 	Controller controller = null;
 	Model model = null;
-	Communication droneCommunication = null;
-	KeyBoardCommands gestures = null;
+	ARDroneController droneCommunication = null;
 	ConsolView view = null;
 	
 	public Boot(){
 		initialize();
-	}
-	
-	public Boot(KeyBoardCommands kbc){
-		gestures = kbc;
 	}
 
 	private void initialize(){
@@ -46,20 +41,12 @@ public class Boot {
 		this.model = model;
 	}
 
-	public Communication getDroneCommunication() {
+	public ARDroneController getDroneCommunication() {
 		return droneCommunication;
 	}
 
-	public void setDroneCommunication(Communication droneCommunication) {
+	public void setDroneCommunication(ARDroneController droneCommunication) {
 		this.droneCommunication = droneCommunication;
-	}
-
-	public KeyBoardCommands getGestures() {
-		return gestures;
-	}
-
-	public void setGestures(KeyBoardCommands gestures) {
-		this.gestures = gestures;
 	}
 
 	public ConsolView getView() {
@@ -69,5 +56,4 @@ public class Boot {
 	public void setView(ConsolView view) {
 		this.view = view;
 	}
-	
 }

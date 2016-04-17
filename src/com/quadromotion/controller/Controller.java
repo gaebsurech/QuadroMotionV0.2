@@ -8,8 +8,6 @@ public class Controller {
 
 	private Model model = null;
 	private ConsolView consolView = null;
-	private KeyBoardCommands gestures = null;
-	
 	
 	/**
 	 * Constructor I
@@ -39,17 +37,12 @@ public class Controller {
 	 * @param consolView the view
 	 */
 	public Controller(Model model, ConsolView consolView) {
-		
-		this.setModel(model);
+		this.model = model;
 		this.consolView = consolView;
 	}
-
-	public KeyBoardCommands getGestures() {
-		return gestures;
-	}
-
-	public void setGestures(KeyBoardCommands gestures) {
-		this.gestures = gestures;
+	
+	public void showView(){
+		consolView.setVisible(true);
 	}
 
 	public Model getModel() {
