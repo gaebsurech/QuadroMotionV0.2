@@ -1,5 +1,9 @@
 package com.quadromotion.app;
-
+/**
+ * This class is the main entry of the QuadroMotion app
+ * @author Gabriel
+ *
+ */
 public class QuadroMotion {
 
 	static App app = null;
