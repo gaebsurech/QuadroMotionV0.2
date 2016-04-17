@@ -1,5 +1,10 @@
 package com.quadromotion.model.convertion;
 
+/**
+ * This class is not needed...
+ * @author Gabriel
+ *
+ */
 public class XSpeedConvertion {
 	
 	private double xSpeed = 0;

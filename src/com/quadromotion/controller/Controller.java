@@ -40,8 +40,9 @@ public class Controller implements IController, Observer {
 		hover = false;
 		this.setModel(model);
 		this.consolView = consolView;
-		setCom(new Communication(model));
-		model.addObserver(this);
+		//setCom(new Communication(model));
+		//gestures = new KeyBoardCommands();
+		//model.addObserver(this);
 	}
 
 	public void sendCommands() {
@@ -52,11 +53,6 @@ public class Controller implements IController, Observer {
 		consolView.printToConsole("countObserver: " + String.valueOf(model.countObservers()));
 		consolView.printToConsole("changed: " + String.valueOf(model.hasChanged()));
 		consolView.printToConsole("speed: " + String.valueOf(model.getxSpeed()));
-	}
-
-	public void setSpeed(double d) {
-		model.setxSpeed((float) d);
-		model.setySpeed((float) d + 4);
 	}
 
 	public float getSpeedX() {

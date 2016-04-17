@@ -2,7 +2,7 @@ package com.quadromotion.model;
 
 import java.util.Observable;
 
-public class Model extends Observable{
+public class Model extends Observable {
 
 	float xSpeed;
 	float ySpeed;
@@ -15,9 +15,9 @@ public class Model extends Observable{
 	boolean isHovering;
 	boolean isConnected;
 	boolean oneHandControl;
-	
-	public Model(){
-		
+
+	public Model() {
+
 		super();
 		this.xSpeed = 0;
 		this.ySpeed = 0;
@@ -31,14 +31,18 @@ public class Model extends Observable{
 		this.isConnected = false;
 		this.oneHandControl = false;
 	}
-	
+
+	public float convert(float angle) {
+		return 2 * angle;
+	}
+
 	public float getxSpeed() {
 		return xSpeed;
 	}
 
 	public void setxSpeed(float speed) {
 		this.xSpeed = speed;
-		if(countObservers()>0){
+		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(speed);
 		}
@@ -50,7 +54,7 @@ public class Model extends Observable{
 
 	public void setySpeed(float speed) {
 		this.ySpeed = speed;
-		if(countObservers()>0){
+		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(speed);
 		}
@@ -62,7 +66,7 @@ public class Model extends Observable{
 
 	public void setzSpeed(float speed) {
 		this.zSpeed = speed;
-		if(countObservers()>0){
+		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(speed);
 		}
@@ -74,7 +78,7 @@ public class Model extends Observable{
 
 	public void setSpinSpeed(float speed) {
 		this.spinSpeed = speed;
-		if(countObservers()>0){
+		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(speed);
 		}
@@ -86,7 +90,7 @@ public class Model extends Observable{
 
 	public void setTakeOff(boolean takeOff) {
 		this.takeOff = takeOff;
-		if(countObservers()>0){
+		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(takeOff);
 		}
@@ -98,7 +102,7 @@ public class Model extends Observable{
 
 	public void setLanding(boolean landing) {
 		this.landing = landing;
-		if(countObservers()>0){
+		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(landing);
 		}
@@ -110,7 +114,7 @@ public class Model extends Observable{
 
 	public void setHover(boolean hover) {
 		this.hover = hover;
-		if(countObservers()>0){
+		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(hover);
 		}

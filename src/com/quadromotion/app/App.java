@@ -27,16 +27,16 @@ public class App {
 		view.printToConsole("run...");
 			// TODO State machine implementieren
 		
-		while(run){
-			
-			controller.countObservers();
-			controller.setSpeed(Math.random());
-			try{
-				Thread.sleep(1000);
-			}
-			catch(Exception e){}
-			
-		}
+//		while(controller.getGestures().isExit()){
+//			
+//			controller.countObservers();
+//			controller.setSpeed(controller.getGestures().getSpeedX());
+//			try{
+//				Thread.sleep(1000);
+//			}
+//			catch(Exception e){}
+//			
+//		}
 	}
 	
 	public void cleanup(){
