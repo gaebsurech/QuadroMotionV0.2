@@ -2,6 +2,7 @@ package com.quadromotion.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.DateFormat.Field;
@@ -13,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import com.quadromotion.controller.Controller;
+import com.quadromotion.gestures.KeyBoardCommands;
 import com.quadromotion.model.Model;
 
 public class ConsolView extends JFrame implements Observer, KeyListener {
@@ -20,30 +22,59 @@ public class ConsolView extends JFrame implements Observer, KeyListener {
 	private float speed = 15;
 	private Model model;
 	private Controller controller;
-	JLabel label;
+	private Object gestures;
+	JLabel labelTitle;
+	JLabel labelLeft;
+	JLabel labelRight;
+	JLabel labelForward;
+	JLabel labelBackward;
 	int c = 0;
 
+	/**
+	 * Constructor I
+	 * @param model
+	 */
 	public ConsolView(Model model) {
-		this.setLayout(new BorderLayout());
-		//JTextField field = new JTextField();
-		label = new JLabel("QuadroMotion");
-		label.addKeyListener(this);
-		//field.addKeyListener(this);
-		this.addKeyListener(this);
-		this.add(label, BorderLayout.CENTER);
-		//this.add(field, BorderLayout.SOUTH);
-		this.pack();
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setLayout(new FlowLayout());
-		this.setBounds(200,100,800,600);
-		this.setVisible(true);
-
+		createView();
+		
+		this.model = model;
+		setController(makeController());
+		this.model.addObserver(this);
+	}
+	
+	/**
+	 * Constructor I
+	 * @param model
+	 */
+	public ConsolView(Model model, String gestureType) {
+		createView();
 		this.model = model;
 		setController(makeController());
 		this.model.addObserver(this);
 	}
 
+	private void createView(){
+		this.setLayout(new BorderLayout());
+		
+		//JTextField field = new JTextField();
+		//field.addKeyListener(this);
+		//this.add(field, BorderLayout.SOUTH);
+		labelTitle = new JLabel("QuadroMotion");
+		labelTitle.addKeyListener(this);
+		this.addKeyListener(this);
+		this.add(labelTitle, BorderLayout.CENTER);
+		
+		labelLeft = new JLabel("Left: ");
+		this.add(labelLeft, BorderLayout.SOUTH);
+
+		this.pack();
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setLayout(new FlowLayout());
+		this.setBounds(200,100,800,600);
+		//this.setVisible(true);
+	}
+	
 	public void printToConsole(String input) {
 		System.out.println(input);
 	}
@@ -66,7 +97,7 @@ public class ConsolView extends JFrame implements Observer, KeyListener {
 		printToConsole("update view: ");
 		c++;
 		Model m = (Model) o;
-		 label.setText("X Speed: "+ m.getxSpeed() + "; "+c);
+		 labelTitle.setText("X Speed: "+ m.getSpeedX() + "; "+c);
  	}
 
 	@Override
@@ -93,10 +124,10 @@ public class ConsolView extends JFrame implements Observer, KeyListener {
 			model.setLanding(true);
 			break;
 		case KeyEvent.VK_LEFT:
-			model.setxSpeed(model.convert(-speed));
+			controller.setSpeedX(-speed);
 			break;
 		case KeyEvent.VK_RIGHT:
-			model.setxSpeed(speed);
+			model.setSpeedX(speed);
 			break;
 		case KeyEvent.VK_UP:
 			System.out.println("foreward");
@@ -142,11 +173,10 @@ public class ConsolView extends JFrame implements Observer, KeyListener {
 			
 			break;
 		case KeyEvent.VK_LEFT:
-			model.setxSpeed(0);
-			//label.setText(String.valueOf(model.convert(0)));
+			controller.setSpeedX(0);
 			break;
 		case KeyEvent.VK_RIGHT:
-			model.setxSpeed(0);
+			model.setSpeedX(0);
 			break;
 		case KeyEvent.VK_UP:
 			System.out.println("foreward");
@@ -172,5 +202,4 @@ public class ConsolView extends JFrame implements Observer, KeyListener {
 			break;
 		}
 	}
-
 }

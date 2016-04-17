@@ -2,27 +2,34 @@ package com.quadromotion.model;
 
 import java.util.Observable;
 
+import com.quadromotion.model.convertion.AngleToSpeedConverter;
+
 public class Model extends Observable {
 
-	float xSpeed;
-	float ySpeed;
-	float zSpeed;
-	float spinSpeed;
-	boolean takeOff;
-	boolean landing;
-	boolean hover;
-	boolean isFlying;
-	boolean isHovering;
-	boolean isConnected;
-	boolean oneHandControl;
-
+	private double speedX;
+	private double speedY;
+	private double speedZ;
+	private double speedSpin;
+	private boolean takeOff;
+	private boolean landing;
+	private boolean hover;
+	private boolean isFlying;
+	private boolean isHovering;
+	private boolean isConnected;
+	private boolean oneHandControl;
+	
+	private AngleToSpeedConverter convertX = null;
+	private AngleToSpeedConverter convertY = null;
+	private AngleToSpeedConverter convertZ = null;
+	private AngleToSpeedConverter convertSpin = null;
+	
 	public Model() {
 
 		super();
-		this.xSpeed = 0;
-		this.ySpeed = 0;
-		this.zSpeed = 0;
-		this.spinSpeed = 0;
+		this.speedX = 0;
+		this.speedY = 0;
+		this.speedZ = 0;
+		this.speedSpin = 0;
 		this.takeOff = false;
 		this.landing = false;
 		this.hover = false;
@@ -30,54 +37,55 @@ public class Model extends Observable {
 		this.isHovering = false;
 		this.isConnected = false;
 		this.oneHandControl = false;
+		
+		convertX = new AngleToSpeedConverter();
+		convertY = new AngleToSpeedConverter();
+		convertZ = new AngleToSpeedConverter();
+		convertSpin = new AngleToSpeedConverter();
 	}
 
-	public float convert(float angle) {
-		return 2 * angle;
+	public double getSpeedX() {
+		return speedX;
 	}
 
-	public float getxSpeed() {
-		return xSpeed;
-	}
-
-	public void setxSpeed(float speed) {
-		this.xSpeed = speed;
+	public void setSpeedX(double speed) {
+		this.speedX = convertX.expConverter(speed);
 		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(speed);
 		}
 	}
 
-	public float getySpeed() {
-		return ySpeed;
+	public double getSpeedY() {
+		return speedY;
 	}
 
-	public void setySpeed(float speed) {
-		this.ySpeed = speed;
+	public void setSpeedY(double speed) {
+		this.speedY = convertY.expConverter(speed);
 		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(speed);
 		}
 	}
 
-	public float getzSpeed() {
-		return zSpeed;
+	public double getSpeedZ() {
+		return speedZ;
 	}
 
-	public void setzSpeed(float speed) {
-		this.zSpeed = speed;
+	public void setSpeedZ(double speed) {
+		this.speedZ = convertZ.expConverter(speed);
 		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(speed);
 		}
 	}
 
-	public float getSpinSpeed() {
-		return spinSpeed;
+	public double getSpeedSpeed() {
+		return speedSpin;
 	}
 
-	public void setSpinSpeed(float speed) {
-		this.spinSpeed = speed;
+	public void setSpeedSpin(double speed) {
+		this.speedSpin = convertSpin.expConverter(speed);
 		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(speed);
