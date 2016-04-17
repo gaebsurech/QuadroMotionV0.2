@@ -51,31 +51,31 @@ public class Controller {
 	}
 
 	public void setSpeedX(double speed) {
-		//model.setSpeedX(speed);
+		model.setSpeedX(speed);
 	}
 
 	public void setSpeedY(double speed) {
-		//model.setSpeedY(speed);
+		model.setSpeedY(speed);
 	}
 
 	public void setSpeedZ(double speed) {
-		//model.setSpeedZ(speed);
+		model.setSpeedZ(speed);
 	}
 
 	public void setSpeedSpin(double speed) {
-		//model.setSpeedSpin(speed);
+		model.setSpeedSpin(speed);
 	}
 	
 	public void setLandingCommand(boolean command){
-		//model.setLandingCommand(command);
+		model.setLanding(command);
 	}
 	
 	public void setTakeOffCommand(boolean command){
-		//model.setTakeOffCommand(command);
+		model.setTakeOff(command);
 	}
 	
 	public void setHoverCommand(boolean command){
-		//model.setHoverCommand(command);
+		model.setHover(command);
 	}
 
 	public void showView() {
