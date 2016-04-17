@@ -1,4 +1,4 @@
-package com.quadromotion.communication;
+package com.quadromotion.controller;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -17,7 +17,7 @@ import de.yadrone.base.command.CommandManager;
  * @param CommandManager
  *            the drone command manager
  */
-public class Communication implements ICommunication, Observer {
+public class ARDroneController implements IARDroneController, Observer {
 
 	/**
 	 * The speed in direction X
@@ -58,7 +58,8 @@ public class Communication implements ICommunication, Observer {
 	 * Constructor I
 	 * @param model the model
 	 */
-	public Communication(Model model) {
+	public ARDroneController(Model model) {
+		
 		initialize(model);
 	}
 
@@ -79,7 +80,6 @@ public class Communication implements ICommunication, Observer {
 	@Override
 	public void moveDrone(float speedX, float speedY, float speedZ, float speedSpin) {
 		cmd.move(speedX, speedY, speedZ, speedSpin);
-		//cmd.doFor(500).move(speedX, speedY, speedZ, speedSpin);
 	}
 
 	/**
