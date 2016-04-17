@@ -23,6 +23,8 @@ public class Model extends Observable {
 	private AngleToSpeedConverter convertZ = null;
 	private AngleToSpeedConverter convertSpin = null;
 	
+	// FinaleStateMachine fsm = null;
+	
 	public Model() {
 
 		super();
@@ -33,8 +35,8 @@ public class Model extends Observable {
 		this.takeOff = false;
 		this.landing = false;
 		this.hover = false;
-		this.isFlying = false;
-		this.isHovering = false;
+		this.setFlying(false);
+		this.setHovering(false);
 		this.isConnected = false;
 		this.oneHandControl = false;
 		
@@ -52,7 +54,7 @@ public class Model extends Observable {
 		this.speedX = convertX.expConverter(speed);
 		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(speed);
+			notifyObservers(this.speedX);
 		}
 	}
 
@@ -64,7 +66,7 @@ public class Model extends Observable {
 		this.speedY = convertY.expConverter(speed);
 		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(speed);
+			notifyObservers(this.speedY);
 		}
 	}
 
@@ -76,11 +78,11 @@ public class Model extends Observable {
 		this.speedZ = convertZ.expConverter(speed);
 		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(speed);
+			notifyObservers(this.speedZ);
 		}
 	}
 
-	public double getSpeedSpeed() {
+	public double getSpeedSpin() {
 		return speedSpin;
 	}
 
@@ -88,7 +90,7 @@ public class Model extends Observable {
 		this.speedSpin = convertSpin.expConverter(speed);
 		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(speed);
+			notifyObservers(this.speedSpin);
 		}
 	}
 
@@ -98,9 +100,10 @@ public class Model extends Observable {
 
 	public void setTakeOff(boolean takeOff) {
 		this.takeOff = takeOff;
+		if(takeOff) setFlying(true);
 		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(takeOff);
+			notifyObservers(this.takeOff);
 		}
 	}
 
@@ -110,6 +113,7 @@ public class Model extends Observable {
 
 	public void setLanding(boolean landing) {
 		this.landing = landing;
+		if(landing) setFlying(false);
 		if (countObservers() > 0) {
 			setChanged();
 			notifyObservers(landing);
@@ -126,6 +130,22 @@ public class Model extends Observable {
 			setChanged();
 			notifyObservers(hover);
 		}
+	}
+
+	public boolean isHovering() {
+		return isHovering;
+	}
+
+	public void setHovering(boolean isHovering) {
+		this.isHovering = isHovering;
+	}
+
+	public boolean isFlying() {
+		return isFlying;
+	}
+
+	public void setFlying(boolean isFlying) {
+		this.isFlying = isFlying;
 	}
 
 }

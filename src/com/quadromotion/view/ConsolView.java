@@ -19,7 +19,8 @@ import com.quadromotion.model.Model;
 
 public class ConsolView extends JFrame implements Observer, KeyListener {
 
-	private float speed = 15;
+	private double speed = 15;
+	private final double ZERO = 0;
 	private Model model;
 	private Controller controller;
 	private Object gestures;
@@ -75,8 +76,12 @@ public class ConsolView extends JFrame implements Observer, KeyListener {
 		//this.setVisible(true);
 	}
 	
-	public void printToConsole(String input) {
-		System.out.println(input);
+	/**
+	 * Prints a string to the console
+	 * @param inputString
+	 */
+	public void printToConsole(String inputString) {
+		System.out.println(inputString);
 	}
 
 	public Controller makeController() {
@@ -93,17 +98,17 @@ public class ConsolView extends JFrame implements Observer, KeyListener {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		printToConsole("update view: ");
+		// TODO Elemente der View aktualisieren
 		c++;
+		printToConsole("model "+ c + " times updated...");
+		printToConsole("Status: " + model.isFlying());
 		Model m = (Model) o;
-		 labelTitle.setText("X Speed: "+ m.getSpeedX() + "; "+c);
+		labelLeft.setText("update counter: "+c);
  	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -113,42 +118,48 @@ public class ConsolView extends JFrame implements Observer, KeyListener {
 		switch (keyCode) {
 		case KeyEvent.VK_ENTER:
 			if(!model.isTakeOff()) {
-				model.setTakeOff(true);
-				System.out.println("start");
-			
+				controller.setTakeOffCommand(true);
+				printToConsole("start = true");
 			}
-			
 			break;
 		case KeyEvent.VK_SPACE:
-			System.out.println("land");
-			model.setLanding(true);
+			controller.setLandingCommand(true);
+			printToConsole("land = true");
 			break;
 		case KeyEvent.VK_LEFT:
 			controller.setSpeedX(-speed);
+			printToConsole("left = " + -speed);
 			break;
 		case KeyEvent.VK_RIGHT:
-			model.setSpeedX(speed);
+			controller.setSpeedX(speed);
+			printToConsole("right = " + speed);
 			break;
 		case KeyEvent.VK_UP:
-			System.out.println("foreward");
+			controller.setSpeedY(speed);
+			printToConsole("foreward = " + speed);
 			break;
 		case KeyEvent.VK_DOWN:
-			System.out.println("backwards");
+			controller.setSpeedY(-speed);
+			printToConsole("backwards = " + -speed);
 			break;
 		case KeyEvent.VK_A:
-			System.out.println("turncounterclockwise");
+			controller.setSpeedSpin(-speed);
+			printToConsole("turn counterclockwise = " + model.getSpeedSpin());
 			break;
 		case KeyEvent.VK_D:
-			System.out.println("turnclockwise");
+			controller.setSpeedSpin(speed);
+			printToConsole("turn clockwise = " + model.getSpeedSpin());
 			break;
 		case KeyEvent.VK_W:
-			System.out.println("up");
+			controller.setSpeedZ(speed);
+			printToConsole("move up = " + speed);
 			break;
 		case KeyEvent.VK_S:
-			System.out.println("down");
+			controller.setSpeedZ(-speed);
+			printToConsole("move down = " + -speed);
 			break;
 		case KeyEvent.VK_ESCAPE:
-			System.out.println("exit");
+			printToConsole("exit");
 		default:
 			break;
 		}
@@ -161,43 +172,49 @@ public class ConsolView extends JFrame implements Observer, KeyListener {
 		
 		switch (keyCode) {
 		case KeyEvent.VK_ENTER:
-			if(!model.isTakeOff()) {
-				model.setTakeOff(true);
-				System.out.println("start");
-			
+			if(model.isTakeOff()) {
+				controller.setTakeOffCommand(false);
+				printToConsole("start = false");
 			}
-			
 			break;
 		case KeyEvent.VK_SPACE:
-			System.out.println("land");
-			
+			controller.setLandingCommand(false);
+			printToConsole("land = false");
 			break;
 		case KeyEvent.VK_LEFT:
-			controller.setSpeedX(0);
+			controller.setSpeedX(ZERO);
+			printToConsole("left = " + ZERO);
 			break;
 		case KeyEvent.VK_RIGHT:
-			model.setSpeedX(0);
+			controller.setSpeedX(ZERO);
+			printToConsole("right = " + ZERO);
 			break;
 		case KeyEvent.VK_UP:
-			System.out.println("foreward");
+			controller.setSpeedY(ZERO);
+			printToConsole("foreward = " + ZERO);
 			break;
 		case KeyEvent.VK_DOWN:
-			System.out.println("backwards");
+			controller.setSpeedY(ZERO);
+			printToConsole("backwards = " + ZERO);
 			break;
 		case KeyEvent.VK_A:
-			System.out.println("turncounterclockwise");
+			controller.setSpeedSpin(ZERO);
+			printToConsole("turncounterclockwise = " + ZERO);
 			break;
 		case KeyEvent.VK_D:
-			System.out.println("turnclockwise");
+			controller.setSpeedSpin(ZERO);
+			printToConsole("turnclockwise = " + ZERO);
 			break;
 		case KeyEvent.VK_W:
-			System.out.println("up");
+			controller.setSpeedZ(ZERO);
+			printToConsole("up = " + ZERO);
 			break;
 		case KeyEvent.VK_S:
-			System.out.println("down");
+			controller.setSpeedZ(ZERO);
+			printToConsole("down = " + ZERO);
 			break;
 		case KeyEvent.VK_ESCAPE:
-			System.out.println("exit");
+			printToConsole("exit");
 		default:
 			break;
 		}
