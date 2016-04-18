@@ -10,9 +10,9 @@ public class Model extends Observable {
 	private double speedY;
 	private double speedZ;
 	private double speedSpin;
-	private boolean takeOff;
-	private boolean landing;
-	private boolean hover;
+	private boolean takeOffCommand;
+	private boolean landingCommand;
+	private boolean hoverCommand;
 	private boolean isFlying;
 	private boolean isHovering;
 	private boolean isConnected;
@@ -32,11 +32,11 @@ public class Model extends Observable {
 		this.speedY = 0;
 		this.speedZ = 0;
 		this.speedSpin = 0;
-		this.takeOff = false;
-		this.landing = false;
-		this.hover = false;
-		this.setFlying(false);
-		this.setHovering(false);
+		this.takeOffCommand = false;
+		this.landingCommand = false;
+		this.hoverCommand = false;
+		this.isFlying = false;
+		this.isHovering = false;
 		this.isConnected = false;
 		this.oneHandControl = false;
 		
@@ -95,40 +95,40 @@ public class Model extends Observable {
 	}
 
 	public boolean isTakeOff() {
-		return takeOff;
+		return takeOffCommand;
 	}
 
-	public void setTakeOff(boolean takeOff) {
-		this.takeOff = takeOff;
-		if(takeOff) setFlying(true);
+	public void setTakeOffCommand(boolean command) {
+		this.takeOffCommand = command;
 		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(this.takeOff);
+			notifyObservers(this.takeOffCommand);
 		}
+		if(command) isFlying = true;
 	}
 
 	public boolean isLanding() {
-		return landing;
+		return landingCommand;
 	}
 
-	public void setLanding(boolean landing) {
-		this.landing = landing;
-		if(landing) setFlying(false);
+	public void setLandingCommand(boolean command) {
+		this.landingCommand = command;
 		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(landing);
+			notifyObservers(this.landingCommand);
 		}
+		if(command) isFlying = false;
 	}
 
-	public boolean isHover() {
-		return hover;
+	public boolean getHoverCommand() {
+		return hoverCommand;
 	}
 
-	public void setHover(boolean hover) {
-		this.hover = hover;
+	public void setHoverCommand(boolean command) {
+		this.hoverCommand = command;
 		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(hover);
+			notifyObservers(this.hoverCommand);
 		}
 	}
 
@@ -136,16 +136,11 @@ public class Model extends Observable {
 		return isHovering;
 	}
 
-	public void setHovering(boolean isHovering) {
-		this.isHovering = isHovering;
-	}
-
 	public boolean isFlying() {
 		return isFlying;
 	}
 
-	public void setFlying(boolean isFlying) {
-		this.isFlying = isFlying;
+	public boolean isConnected() {
+		return isConnected;
 	}
-
 }

@@ -67,15 +67,15 @@ public class Controller {
 	}
 	
 	public void setLandingCommand(boolean command){
-		model.setLanding(command);
+		model.setLandingCommand(command);
 	}
 	
 	public void setTakeOffCommand(boolean command){
-		model.setTakeOff(command);
+		model.setTakeOffCommand(command);
 	}
 	
 	public void setHoverCommand(boolean command){
-		model.setHover(command);
+		model.setHoverCommand(command);
 	}
 
 	public void showView() {
