@@ -3,9 +3,12 @@ package com.quadromotion.model;
 import java.util.Observable;
 
 import com.quadromotion.model.convertion.AngleToSpeedConverter;
+import com.quadromotion.config.OffsetConfig;
+import com.quadromotion.config.OffsetValues;
 
 public class Model extends Observable {
 
+	
 	private double speedX;
 	private double speedY;
 	private double speedZ;
@@ -17,12 +20,16 @@ public class Model extends Observable {
 	private boolean isHovering;
 	private boolean isConnected;
 	private boolean oneHandControl;
-	
+		
 	private AngleToSpeedConverter convertX = null;
 	private AngleToSpeedConverter convertY = null;
 	private AngleToSpeedConverter convertZ = null;
 	private AngleToSpeedConverter convertSpin = null;
 	
+	OffsetConfig offsetConfig = null;
+	OffsetValues offsetValues = null;
+	
+
 	// FinaleStateMachine fsm = null;
 	
 	public Model() {
@@ -40,10 +47,15 @@ public class Model extends Observable {
 		this.isConnected = false;
 		this.oneHandControl = false;
 		
-		convertX = new AngleToSpeedConverter();
-		convertY = new AngleToSpeedConverter();
-		convertZ = new AngleToSpeedConverter();
-		convertSpin = new AngleToSpeedConverter();
+		offsetValues = new OffsetValues();
+		offsetConfig = new OffsetConfig();
+		
+		convertX = new AngleToSpeedConverter(offsetConfig.getMaxAngleX(), offsetConfig.getMaxSpeedX(), offsetConfig.getSpeedOffsetX(), offsetConfig.getAngleOffsetX(), offsetConfig.getFunctionExpX());
+		convertY = new AngleToSpeedConverter(offsetConfig.getMaxAngleY(), offsetConfig.getMaxSpeedY(), offsetConfig.getSpeedOffsetY(), offsetConfig.getAngleOffsetY(), offsetConfig.getFunctionExpY());
+		convertZ = new AngleToSpeedConverter(offsetConfig.getMaxAngleZ(), offsetConfig.getMaxSpeedZ(), offsetConfig.getSpeedOffsetZ(), offsetConfig.getAngleOffsetZ(), offsetConfig.getFunctionExpZ());
+		convertSpin = new AngleToSpeedConverter(offsetConfig.getMaxAngleSpin(), offsetConfig.getMaxSpeedSpin(), offsetConfig.getSpeedOffsetSpin(), offsetConfig.getAngleOffsetSpin(), offsetConfig.getFunctionExpSpin());
+		
+		
 	}
 
 	public double getSpeedX() {

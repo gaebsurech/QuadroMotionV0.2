@@ -89,9 +89,7 @@ public class LeapMotion extends Observable implements IGestures {
 
 					rechtSphereRadius = hand.sphereRadius();
 
-					//pilot.setRightHand(rechtPitch, rechtYaw, rechtRoll, rechtSphereRadius);
-
-
+					
 				}
 				if (handType == "Left hand") {
 
