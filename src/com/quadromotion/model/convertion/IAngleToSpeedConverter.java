@@ -4,10 +4,12 @@ public interface IAngleToSpeedConverter {
 
 	
 
-	// methods
+	// methods	
 	public double expConverter(double inputValue);
 
 	public double linearConverter(double inputValue);
+	
+	public double HeavySideConverter(double inputValue);
 
 	// getter & setter
 	public double getInputValue();
