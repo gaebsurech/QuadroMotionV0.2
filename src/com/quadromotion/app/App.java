@@ -1,41 +1,38 @@
 package com.quadromotion.app;
 
-import com.quadromotion.boot.Boot;
+//import com.quadromotion.boot.Boot;
 import com.quadromotion.controller.Controller;
 import com.quadromotion.model.Model;
 import com.quadromotion.view.ConsolView;
 
 public class App {
 
-	boolean run = false;
-	static Controller controller = null;
 	static Model model = null;
-	static Boot boot = null;
 	static ConsolView view = null;
+	static Controller controller = null;
+	//static Boot boot = null;
+
 	
 	public void boot() {
-		// TODO Auto-generated method stub
-		boot = new Boot();
-		model = boot.getModel();
-		controller = boot.getController();
-		view = boot.getView();
+		// TODO: Gesteneingabe der View mitgeben
+		//boot = new Boot();
+		model = new Model();
+		view = new ConsolView(model);
+		controller =  view.getController();
 		view.printToConsole("Boot done...");
 	}
 
 	public void run(){
-		
+		controller.showView();
 		view.printToConsole("run...");
-			// TODO State machine implementieren
 		
-		while(run){
+		try{
+			System.in.read();
+		} catch(Exception ignore){
 			
-			controller.countObservers();
-			controller.setSpeed(Math.random());
-			try{
-				Thread.sleep(1000);
-			}
-			catch(Exception e){}
-			
+		}
+		finally{
+			view.printToConsole("exit...");
 		}
 	}
 	

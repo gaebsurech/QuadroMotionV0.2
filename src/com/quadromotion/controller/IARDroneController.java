@@ -1,11 +1,11 @@
-package com.quadromotion.communication;
+package com.quadromotion.controller;
 
 /**
  * This Interface defines the methods needed for the communication with the drone.
  * @author Gabriel
  *
  */
-public interface ICommunication {
+public interface IARDroneController {
 	
 	/**
 	 * This method is needed to move the drone in every direction

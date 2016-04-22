@@ -1,5 +1,7 @@
 package com.quadromotion.gestures;
 
+import java.util.Observable;
+
 import com.leapmotion.leap.*;
 //import com.leapmotion.leap.Bone;
 //import com.leapmotion.leap.CircleGesture;
@@ -18,7 +20,7 @@ import com.leapmotion.leap.Vector;
 //import com.leapmotion.leap.Gesture.State;
 
 
-public class LeapMotion implements IGestures   {
+public class LeapMotion extends Observable implements IGestures {
 
 	private int anzahlHaenden = 0;
 	
@@ -87,9 +89,7 @@ public class LeapMotion implements IGestures   {
 
 					rechtSphereRadius = hand.sphereRadius();
 
-					//pilot.setRightHand(rechtPitch, rechtYaw, rechtRoll, rechtSphereRadius);
-
-
+					
 				}
 				if (handType == "Left hand") {
 

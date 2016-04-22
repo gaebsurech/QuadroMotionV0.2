@@ -2,118 +2,157 @@ package com.quadromotion.model;
 
 import java.util.Observable;
 
-public class Model extends Observable{
+import com.quadromotion.model.convertion.AngleToSpeedConverter;
+import com.quadromotion.config.OffsetConfig;
+import com.quadromotion.config.OffsetValues;
 
-	float xSpeed;
-	float ySpeed;
-	float zSpeed;
-	float spinSpeed;
-	boolean takeOff;
-	boolean landing;
-	boolean hover;
-	boolean isFlying;
-	boolean isHovering;
-	boolean isConnected;
-	boolean oneHandControl;
+public class Model extends Observable {
+
 	
-	public Model(){
+	private double speedX;
+	private double speedY;
+	private double speedZ;
+	private double speedSpin;
+	private boolean takeOffCommand;
+	private boolean landingCommand;
+	private boolean hoverCommand;
+	private boolean isFlying;
+	private boolean isHovering;
+	private boolean isConnected;
+	private boolean oneHandControl;
 		
+	private AngleToSpeedConverter convertX = null;
+	private AngleToSpeedConverter convertY = null;
+	private AngleToSpeedConverter convertZ = null;
+	private AngleToSpeedConverter convertSpin = null;
+	
+	OffsetConfig offsetConfig = null;
+	OffsetValues offsetValues = null;
+	
+
+	// FinaleStateMachine fsm = null;
+	
+	public Model() {
+
 		super();
-		this.xSpeed = 0;
-		this.ySpeed = 0;
-		this.zSpeed = 0;
-		this.spinSpeed = 0;
-		this.takeOff = false;
-		this.landing = false;
-		this.hover = false;
+		this.speedX = 0;
+		this.speedY = 0;
+		this.speedZ = 0;
+		this.speedSpin = 0;
+		this.takeOffCommand = false;
+		this.landingCommand = false;
+		this.hoverCommand = false;
 		this.isFlying = false;
 		this.isHovering = false;
 		this.isConnected = false;
 		this.oneHandControl = false;
-	}
-	
-	public float getxSpeed() {
-		return xSpeed;
+		
+		offsetValues = new OffsetValues();
+		offsetConfig = new OffsetConfig();
+		
+		convertX = new AngleToSpeedConverter(offsetConfig.getMaxAngleX(), offsetConfig.getMaxSpeedX(), offsetConfig.getSpeedOffsetX(), offsetConfig.getAngleOffsetX(), offsetConfig.getFunctionExpX());
+		convertY = new AngleToSpeedConverter(offsetConfig.getMaxAngleY(), offsetConfig.getMaxSpeedY(), offsetConfig.getSpeedOffsetY(), offsetConfig.getAngleOffsetY(), offsetConfig.getFunctionExpY());
+		convertZ = new AngleToSpeedConverter(offsetConfig.getMaxAngleZ(), offsetConfig.getMaxSpeedZ(), offsetConfig.getSpeedOffsetZ(), offsetConfig.getAngleOffsetZ(), offsetConfig.getFunctionExpZ());
+		convertSpin = new AngleToSpeedConverter(offsetConfig.getMaxAngleSpin(), offsetConfig.getMaxSpeedSpin(), offsetConfig.getSpeedOffsetSpin(), offsetConfig.getAngleOffsetSpin(), offsetConfig.getFunctionExpSpin());
+		
+		
 	}
 
-	public void setxSpeed(float speed) {
-		this.xSpeed = speed;
-		if(countObservers()>0){
+	public double getSpeedX() {
+		return speedX;
+	}
+
+	public void setSpeedX(double speed) {
+		this.speedX = convertX.expConverter(speed);
+		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(speed);
+			notifyObservers(this.speedX);
 		}
 	}
 
-	public float getySpeed() {
-		return ySpeed;
+	public double getSpeedY() {
+		return speedY;
 	}
 
-	public void setySpeed(float speed) {
-		this.ySpeed = speed;
-		if(countObservers()>0){
+	public void setSpeedY(double speed) {
+		this.speedY = convertY.expConverter(speed);
+		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(speed);
+			notifyObservers(this.speedY);
 		}
 	}
 
-	public float getzSpeed() {
-		return zSpeed;
+	public double getSpeedZ() {
+		return speedZ;
 	}
 
-	public void setzSpeed(float speed) {
-		this.zSpeed = speed;
-		if(countObservers()>0){
+	public void setSpeedZ(double speed) {
+		this.speedZ = convertZ.expConverter(speed);
+		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(speed);
+			notifyObservers(this.speedZ);
 		}
 	}
 
-	public float getSpinSpeed() {
-		return spinSpeed;
+	public double getSpeedSpin() {
+		return speedSpin;
 	}
 
-	public void setSpinSpeed(float speed) {
-		this.spinSpeed = speed;
-		if(countObservers()>0){
+	public void setSpeedSpin(double speed) {
+		this.speedSpin = convertSpin.expConverter(speed);
+		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(speed);
+			notifyObservers(this.speedSpin);
 		}
 	}
 
 	public boolean isTakeOff() {
-		return takeOff;
+		return takeOffCommand;
 	}
 
-	public void setTakeOff(boolean takeOff) {
-		this.takeOff = takeOff;
-		if(countObservers()>0){
+	public void setTakeOffCommand(boolean command) {
+		this.takeOffCommand = command;
+		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(takeOff);
+			notifyObservers(this.takeOffCommand);
 		}
+		if(command) isFlying = true;
 	}
 
 	public boolean isLanding() {
-		return landing;
+		return landingCommand;
 	}
 
-	public void setLanding(boolean landing) {
-		this.landing = landing;
-		if(countObservers()>0){
+	public void setLandingCommand(boolean command) {
+		this.landingCommand = command;
+		if (countObservers() > 0) {
 			setChanged();
-			notifyObservers(landing);
+			notifyObservers(this.landingCommand);
+		}
+		if(command) isFlying = false;
+	}
+
+	public boolean getHoverCommand() {
+		return hoverCommand;
+	}
+
+	public void setHoverCommand(boolean command) {
+		this.hoverCommand = command;
+		if (countObservers() > 0) {
+			setChanged();
+			notifyObservers(this.hoverCommand);
 		}
 	}
 
-	public boolean isHover() {
-		return hover;
+	public boolean isHovering() {
+		return isHovering;
 	}
 
-	public void setHover(boolean hover) {
-		this.hover = hover;
-		if(countObservers()>0){
-			setChanged();
-			notifyObservers(hover);
-		}
+	public boolean isFlying() {
+		return isFlying;
 	}
 
+	public boolean isConnected() {
+		return isConnected;
+	}
 }
