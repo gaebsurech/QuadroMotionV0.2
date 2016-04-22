@@ -4,7 +4,6 @@ import java.util.Observable;
 
 import com.quadromotion.model.convertion.AngleToSpeedConverter;
 import com.quadromotion.config.OffsetConfig;
-import com.quadromotion.config.OffsetValues;
 
 public class Model extends Observable {
 
@@ -26,10 +25,6 @@ public class Model extends Observable {
 	private AngleToSpeedConverter convertZ = null;
 	private AngleToSpeedConverter convertSpin = null;
 	
-	OffsetConfig offsetConfig = null;
-	OffsetValues offsetValues = null;
-	
-
 	// FinaleStateMachine fsm = null;
 	
 	public Model() {
@@ -46,14 +41,11 @@ public class Model extends Observable {
 		this.isHovering = false;
 		this.isConnected = false;
 		this.oneHandControl = false;
-		
-		offsetValues = new OffsetValues();
-		offsetConfig = new OffsetConfig();
-		
-		convertX = new AngleToSpeedConverter(offsetConfig.getMaxAngleX(), offsetConfig.getMaxSpeedX(), offsetConfig.getSpeedOffsetX(), offsetConfig.getAngleOffsetX(), offsetConfig.getFunctionExpX());
-		convertY = new AngleToSpeedConverter(offsetConfig.getMaxAngleY(), offsetConfig.getMaxSpeedY(), offsetConfig.getSpeedOffsetY(), offsetConfig.getAngleOffsetY(), offsetConfig.getFunctionExpY());
-		convertZ = new AngleToSpeedConverter(offsetConfig.getMaxAngleZ(), offsetConfig.getMaxSpeedZ(), offsetConfig.getSpeedOffsetZ(), offsetConfig.getAngleOffsetZ(), offsetConfig.getFunctionExpZ());
-		convertSpin = new AngleToSpeedConverter(offsetConfig.getMaxAngleSpin(), offsetConfig.getMaxSpeedSpin(), offsetConfig.getSpeedOffsetSpin(), offsetConfig.getAngleOffsetSpin(), offsetConfig.getFunctionExpSpin());
+				
+		convertX = new AngleToSpeedConverter(OffsetConfig.MAX_ANGLE_X, OffsetConfig.MAX_SPEED_X, OffsetConfig.SPEED_OFFSET_X, OffsetConfig.ANGLE_OFFSET_X, OffsetConfig.FUNCTION_EXP_X);
+		convertY = new AngleToSpeedConverter(OffsetConfig.MAX_ANGLE_X, OffsetConfig.MAX_SPEED_Y, OffsetConfig.SPEED_OFFSET_Y, OffsetConfig.ANGLE_OFFSET_Y, OffsetConfig.FUNCTION_EXP_Y);
+		convertZ = new AngleToSpeedConverter(OffsetConfig.MAX_ANGLE_Z, OffsetConfig.MAX_SPEED_Z, OffsetConfig.SPEED_OFFSET_Z, OffsetConfig.ANGLE_OFFSET_Z, OffsetConfig.FUNCTION_EXP_Z);
+		convertSpin = new AngleToSpeedConverter(OffsetConfig.MAX_ANGLE_SPIN, OffsetConfig.MAX_SPEED_SPIN, OffsetConfig.SPEED_OFFSET_SPIN, OffsetConfig.ANGLE_OFFSET_SPIN, OffsetConfig.FUNCTION_EXP_SPIN);
 		
 		
 	}
